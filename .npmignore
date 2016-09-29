@@ -1,0 +1,11 @@
+src
+.idea
+test
+node_modules
+.git
+npm-debug.log
+.travis.yml
+coverage
+.nyc_output
+.babelrc
+
