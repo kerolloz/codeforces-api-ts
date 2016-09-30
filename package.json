@@ -2,16 +2,18 @@
   "name": "codeforces-api",
   "version": "1.0.0",
   "description": "Codeforces API Client Library for Node.js",
-  "main": "dist/index.js",
+  "main": "dist/codeforces.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers js:babel-register \"test/**/*\"",
+    "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha  --compilers js:babel-register \"test/**/*\"",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | coveralls"
   },
-  "engine": "node >= 0.10.0",
+  "engine": "node >= 4.0.0",
   "author": "Ahmed Dinar <madinar.cse@gmail.com>",
   "private": false,
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.16.0",
     "babel-register": "^6.16.0",
     "chai": "^3.5.0",

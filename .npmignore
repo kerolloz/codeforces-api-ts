@@ -8,4 +8,5 @@ npm-debug.log
 coverage
 .nyc_output
 .babelrc
+gulpfile.js
 
