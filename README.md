@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ahmed-dinar/codeforces-api-node.svg?branch=master)](https://travis-ci.org/ahmed-dinar/codeforces-api-node) 
 [![Coverage Status](https://coveralls.io/repos/github/ahmed-dinar/codeforces-api-node/badge.svg?branch=master)](https://coveralls.io/github/ahmed-dinar/codeforces-api-node?branch=master)
+[![npm version](https://badge.fury.io/js/codeforces-api.svg)](https://badge.fury.io/js/codeforces-api)
 
 codeforces-api-node is a simple NodeJS library for Codeforces Api with streaming support.
 
