@@ -6,16 +6,27 @@ let apiSecret = process.env.CFS;
 
 Codeforces.setApis(apiKey, apiSecret);
 
-let TEST_TIMEOUT = process.env.CFT_TIMEOUT || 50000;
+let TEST_TIMEOUT = process.env.CFT_TIMEOUT || 60000; //1 minute
+
+//neccessary informations for testing
+let confg = {
+    blogEntry: {
+        validId: 79,
+        invalidId: 1500
+    },
+    contest:{
+        validId: 566,
+        invalidId: 25000,
+    }
+};
 
 describe('Codeforces', function() {
-
     describe('#blogEntry', function() {
         describe('.comments', function() {
 
             this.timeout(TEST_TIMEOUT);
 
-            it('should return error when blogEntryId empty', (done) => {
+            it('should return error when blogEntryId is empty', (done) => {
                 Codeforces.blogEntry.comments({},function (err,result) {
                     expect(err).to.not.be.null;
                     expect(err).to.not.be.undefined;
@@ -23,8 +34,17 @@ describe('Codeforces', function() {
                 });
             });
 
-            it('should successfully return json', (done) => {
-                Codeforces.blogEntry.comments({ blogEntryId: 79 },function (err,result) {
+
+            it('should failed when blogEntryId is invalid', (done) => {
+                Codeforces.blogEntry.comments({  blogEntryId: confg.blogEntry.invalidId },function (err,result) {
+                    expect(err).to.not.be.null;
+                    expect(err).to.not.be.undefined;
+                    done();
+                });
+            });
+
+            it('should successfully return json when blogEntryId is valid', (done) => {
+                Codeforces.blogEntry.comments({ blogEntryId: confg.blogEntry.validId },function (err,result) {
                     expect(err).to.be.null;
                     done();
                 });
@@ -35,7 +55,7 @@ describe('Codeforces', function() {
 
             this.timeout(TEST_TIMEOUT);
 
-            it('should return error when blogEntryId empty', (done) => {
+            it('should return error when blogEntryId is empty', (done) => {
                 Codeforces.blogEntry.view({},function (err,result) {
                     expect(err).to.not.be.null;
                     expect(err).to.not.be.undefined;
@@ -43,8 +63,16 @@ describe('Codeforces', function() {
                 });
             });
 
+            it('should failed when blogEntryId is invalid', (done) => {
+                Codeforces.blogEntry.view({ blogEntryId: confg.blogEntry.invalidId },function (err,result) {
+                    expect(err).to.not.be.null;
+                    expect(err).to.not.be.undefined;
+                    done();
+                });
+            });
+
             it('should successfully return json', (done) => {
-                Codeforces.blogEntry.view({ blogEntryId: 79 },function (err,result) {
+                Codeforces.blogEntry.view({ blogEntryId: confg.blogEntry.validId },function (err,result) {
                     expect(err).to.be.null;
                     done();
                 });
@@ -60,7 +88,7 @@ describe('Codeforces', function() {
 
             this.timeout(TEST_TIMEOUT);
 
-            it('should return error when contestId empty', (done) => {
+            it('should return error when contestId is empty', (done) => {
                 Codeforces.contest.hacks({},function (err,result) {
                     expect(err).to.not.be.null;
                     expect(err).to.not.be.undefined;
@@ -68,20 +96,49 @@ describe('Codeforces', function() {
                 });
             });
 
-            it('should successfully return json', (done) => {
-                Codeforces.contest.hacks({ contestId : 700 },function (err,result) {
+            it('should failed when contestID is invalid', (done) => {
+                Codeforces.contest.hacks({ contestId : confg.contest.invalidId },function (err,result) {
+                    expect(err).to.not.be.null;
+                    expect(err).to.not.be.undefined;
+                    done();
+                });
+            });
+
+            it('should successfully return json when contestId is valid', (done) => {
+                Codeforces.contest.hacks({ contestId : 1 },function (err,result) {
                     expect(err).to.be.null;
                     done();
                 });
             });
 
         });
+
+        describe('.list', function() {
+
+            this.timeout(TEST_TIMEOUT);
+
+            it('should successfully return json', (done) => {
+                Codeforces.contest.list({ gym : false },function (err,result) {
+                    expect(err).to.be.null;
+                    done();
+                });
+            });
+        });
+
         describe('.ratingChanges', function() {
 
             this.timeout(TEST_TIMEOUT);
 
-            it('should return error when contestId empty', (done) => {
+            it('should return error when contestId is empty', (done) => {
                 Codeforces.contest.ratingChanges({},function (err,result) {
+                    expect(err).to.not.be.null;
+                    expect(err).to.not.be.undefined;
+                    done();
+                });
+            });
+
+            it('should failed when contestId is invalid', (done) => {
+                Codeforces.contest.ratingChanges({ contestId: confg.contest.invalidId },function (err,result) {
                     expect(err).to.not.be.null;
                     expect(err).to.not.be.undefined;
                     done();
@@ -94,7 +151,6 @@ describe('Codeforces', function() {
                     done();
                 });
             });
-
         });
 
         describe('.standings', function() {
@@ -109,8 +165,29 @@ describe('Codeforces', function() {
                 });
             });
 
-            it('should successfully return json', (done) => {
+            it('should successfully return json without handles', (done) => {
                 Codeforces.contest.standings({ contestId: 1, from:1, count:1, showUnofficial:true },function (err,result) {
+                    expect(err).to.be.null;
+                    done();
+                });
+            });
+
+            it('should successfully return json without handles and with room', (done) => {
+                Codeforces.contest.standings({ contestId: 1, from:1, count:1, showUnofficial:true, room: 3 },function (err,result) {
+                    expect(err).to.be.null;
+                    done();
+                });
+            });
+
+            it('should successfully return json with single handles', (done) => {
+                Codeforces.contest.standings({ contestId: 1, handles: 'Gullesnuffs', from:1, count:2, showUnofficial:true },function (err,result) {
+                    expect(err).to.be.null;
+                    done();
+                });
+            });
+
+            it('should successfully return json with array of handles', (done) => {
+                Codeforces.contest.standings({ contestId: 1, handles: ['Gullesnuffs','uwi'], from:1, count:2, showUnofficial:true },function (err,result) {
                     expect(err).to.be.null;
                     done();
                 });
@@ -130,8 +207,15 @@ describe('Codeforces', function() {
                 });
             });
 
-            it('should successfully return json', (done) => {
-                Codeforces.contest.status({ contestId: 1, from:1, count:1, handle: 'tapioca' },function (err,result) {
+            it('should successfully return json without handle', (done) => {
+                Codeforces.contest.status({ contestId: 566, from:1, count:1 },function (err,result) {
+                    expect(err).to.be.null;
+                    done();
+                });
+            });
+
+            it('should successfully return json with handle', (done) => {
+                Codeforces.contest.status({ contestId: 566, from:1, count:1, handle: 'tapioca' },function (err,result) {
                     expect(err).to.be.null;
                     done();
                 });
@@ -147,8 +231,22 @@ describe('Codeforces', function() {
 
             this.timeout(TEST_TIMEOUT);
 
-            it('should successfully return json', (done) => {
+            it('should successfully return json without tag', (done) => {
+                Codeforces.problemset.problems({},function (err,result) {
+                    expect(err).to.be.null;
+                    done();
+                });
+            });
+
+            it('should successfully return json with single tag', (done) => {
                 Codeforces.problemset.problems({ tags: 'probabilities' },function (err,result) {
+                    expect(err).to.be.null;
+                    done();
+                });
+            });
+
+            it('should successfully return json with array of tags', (done) => {
+                Codeforces.problemset.problems({ tags: ['probabilities','two pointers'] },function (err,result) {
                     expect(err).to.be.null;
                     done();
                 });
@@ -227,8 +325,15 @@ describe('Codeforces', function() {
 
             this.timeout(TEST_TIMEOUT);
 
-            it('should successfully return json', (done) => {
+            it('should successfully return json with onlyOnline', (done) => {
                 Codeforces.user.friends({ onlyOnline : true },function (err,result) {
+                    expect(err).to.be.null;
+                    done();
+                });
+            });
+
+            it('should successfully return json without onlyOnline', (done) => {
+                Codeforces.user.friends({ },function (err,result) {
                     expect(err).to.be.null;
                     done();
                 });
@@ -256,15 +361,30 @@ describe('Codeforces', function() {
                 });
             });
 
-/*
+
             it('should successfully return json when array of handles passed', (done) => {
                 Codeforces.user.info({ handles: ['Fefer_Ivan','DmitriyH'] },function (err,result) {
                     expect(err).to.be.null;
                     done();
                 });
-            });*/
+            });
 
         });
+
+        /* //data is huge
+        describe('.ratedList', function() {
+
+            this.timeout(TEST_TIMEOUT);
+
+            it('should successfully return json', (done) => {
+                Codeforces.user.ratedList({ activeOnly: true },function (err,result) {
+                    expect(err).to.not.be.null;
+                    expect(err).to.not.be.undefined;
+                    done();
+                });
+            });
+
+        });*/
 
         describe('.rating', function() {
 
@@ -307,8 +427,5 @@ describe('Codeforces', function() {
             });
 
         });
-
     });
-
-
 });

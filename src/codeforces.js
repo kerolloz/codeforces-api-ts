@@ -23,7 +23,7 @@ class CF {
             API_URL: "http://codeforces.com/api",
             API_KEY: "",
             API_SECRET: "",
-            DEFAULT_TIMEOUT: 55000
+            DEFAULT_TIMEOUT: 60000  //1 minute
         };
 
         //user method
@@ -39,10 +39,10 @@ class CF {
         //contest method
         this.contest = {
             hacks: callApi.bind(this,"contest.hacks"),
-            list: callApi.bind(this,"contest.hacks"),
-            ratingChanges: callApi.bind(this,"contest.hacks"),
-            standings: callApi.bind(this,"contest.hacks"),
-            status: callApi.bind(this,"contest.hacks")
+            list: callApi.bind(this,"contest.list"),
+            ratingChanges: callApi.bind(this,"contest.ratingChanges"),
+            standings: callApi.bind(this,"contest.standings"),
+            status: callApi.bind(this,"contest.status")
         };
 
         //all problemset method
@@ -96,7 +96,7 @@ function callApi(method, params, cb) {
 
     opts.method = method;
 
-    //final url of API reuqest
+    //final url of API request
     let url = makeApiUrl(opts,params);
 
 
@@ -140,13 +140,12 @@ function makeApiUrl(options,params) {
     query.time = curTime;
     query.apiKey  = options.API_KEY;
 
-    //if any parameter given as array, make then string separated by semicolon(;)
+    //if any parameter given as array, make it string separated by semicolon(;)
     for(let key in params){
         if( _.isArray(params[key]) ){
             params[key] = _.join(params[key],';');
         }
     }
-
 
 
     //sort the parameters according to codeforces API rules
@@ -161,11 +160,11 @@ function makeApiUrl(options,params) {
         .mapValues('value')
         .value();
 
-    let apiSig =  randomToken + '/' + options.method + '?' + qs.stringify(query) + '#' + options.API_SECRET;
+    let apiSig =  randomToken + '/' + options.method + '?' + qs.stringify(query,{ encode: false }) + '#' + options.API_SECRET;
     apiSig = sha512(apiSig).toString();
     query.apiSig = randomToken + apiSig;
 
-    let url = options.API_URL + '/' + options.method + '?' + qs.stringify(query);
+    let url = options.API_URL + '/' + options.method + '?' + qs.stringify(query,{ encode: false });
 
     return url;
 }

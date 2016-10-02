@@ -8,10 +8,14 @@ var apiSecret = process.env.CFS;
 Codeforces.setApis(apiKey, apiSecret);
 
 var params = {
-    handles: 'Fefer_Ivan;DmitriyH'
+    contestId: 566,
+    from: 1,
+    count: 2,
+    showUnofficial:true,
+    handles: 'rng_58;W4yneb0t'
 };
 
-Codeforces.user.info(params,function (err,result) {
+Codeforces.contest.standings(params,function (err,result) {
 
     if (err) {
         return console.log(err);
