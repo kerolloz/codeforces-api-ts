@@ -1,6 +1,6 @@
 {
   "name": "codeforces-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Codeforces API Client Library for Node.js",
   "main": "dist/codeforces.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "randomstring": "^1.1.5",
     "request": "^2.75.0"
   },
+  "homepage": "https://github.com/ahmed-dinar/codeforces-api-node",
   "keywords": [
     "codeforces",
     "codeforces api",
@@ -42,7 +43,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:ahmed-dinar/codeforces-api-node.git"
+    "url": "https://github.com/ahmed-dinar/codeforces-api-node.git"
   },
   "contributors": [],
   "bugs": {

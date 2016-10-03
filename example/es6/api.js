@@ -10,13 +10,14 @@ var params = {
     count: 1
 };
 
-Codeforces.problemset.recentStatus(params,function (err,result) {
+Codeforces.problemset.recentStatus(params,  (err,result) => {
 
     if (err) {
         return console.log(err);
     }
 
     console.log(result);
+    console.log("yes");
 
 });
 
