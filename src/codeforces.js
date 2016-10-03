@@ -4,7 +4,7 @@ import * as _ from "lodash";
 import moment from 'moment';
 import qs from 'qs';
 import randomstring from 'randomstring';
-import request from 'request';
+import Request from 'request/request';
 import sha512 from 'crypto-js/sha512';
 
 
@@ -14,11 +14,11 @@ import sha512 from 'crypto-js/sha512';
 class CF {
 
     /**
-     * Class constructor, It will Set default routes and options,
+     * Class constructor, It will Set default routes and options
      */
     constructor () {
 
-        //credentials for api call
+        //credentials for API call
         this.options = {
             API_URL: "http://codeforces.com/api",
             API_KEY: "",
@@ -63,10 +63,8 @@ class CF {
 
 
     /**
-     * Set api and api secret key for authenticate a API request.
-     *
-     * @param {string} API_KEY - user api key
-     * @param {string} API_SECRET - user api secret
+     * @param {string} API_KEY - user API key
+     * @param {string} API_SECRET - user API secret
      */
     setApis (API_KEY = "", API_SECRET = "") {
         this.options.API_KEY = API_KEY;
@@ -75,51 +73,90 @@ class CF {
 }
 
 
+
 /**
- * Main HTTP request function.
  * About method and parameters, see official doc - http://codeforces.com/api/help/
  *
- * @param {string} method - method of API request. [see doc]
- * @param {object} params - API url parameters [see doc]
- * @param {function} cb - callback function for async request
+ * @param {string} method - method of API request.
+ * @param {object} parameters - API url parameters
+ * @param {function} callback
  * @returns {*}
  */
-function callApi(method, params, cb) {
+function callApi(method, parameters, callback) {
+
+    if (typeof parameters === 'undefined') {
+        throw new Error('undefined is not a valid parameters object.');
+    }
+
+    if( typeof parameters !== 'object' ){
+        throw new Error('valid parameters object required.');
+    }
 
     let opts = this.options;
 
-    //validate api key
+    let noCallback = !callback || typeof callback !== 'function';
     let noApiKey = typeof opts.API_KEY !== 'string' || opts.API_KEY.length === 0 || typeof opts.API_SECRET !== 'string' || opts.API_SECRET.length === 0;
     if( noApiKey ){
-        return cb(new Error("API key and API secret required.Please set before calling api."));
+        if( noCallback ){
+            throw new Error('API key and API secret required.');
+        }
+        return callback(new Error("API key and API secret required."));
     }
 
     opts.method = method;
 
-    //final url of API request
-    let url = makeApiUrl(opts,params);
+    //target API url with hashes
+    let url = makeApiUrl(opts, parameters);
 
-
-    //request config
-    let requestConfig = {
+    let reqOptions = {
         uri: url,
         json: true,
         timeout: process.env.CF_TIMEOUT || opts.DEFAULT_TIMEOUT
     };
 
-    //return request for streaming, some data are so big
-    return request(requestConfig, function (err,httpResponse,body) {
-        if(err){
-            return cb(err);
-        }
+    //callback not exists, just return the request modules Request class instance for event
+    if( noCallback ){
+        return new Request(reqOptions);
+    }
 
-        //API request failed
-        if( body.status !== 'OK' ){
-            return cb(new Error(body.comment));
-        }
+    //callback exists, return Request for streaming and handle callback for error handling and custom formatted data
+    return callRequest(reqOptions, handleCallback.bind(null,callback) );
+}
 
-        return cb(null,body.result);
-    });
+
+/**
+ * Handle user callback
+ *
+ * @param callback - user callback
+ * @param err - request errors
+ * @param httpResponse - request HTTP response
+ * @param body - request response body
+ * @returns {*}
+ */
+function handleCallback(callback, err, httpResponse, body) {
+
+    if(err){
+        return callback(err);
+    }
+
+    //API returns error
+    if( body.status !== 'OK' ){
+        return callback(body.comment);
+    }
+
+    return callback(null, body.result);
+}
+
+
+/**
+ * Call request modules main class instead of base function
+ * @param options
+ * @param callback
+ * @returns {Request}
+ */
+function callRequest(options,callback) {
+    options.callback = callback;
+    return new Request(options);
 }
 
 
@@ -127,13 +164,13 @@ function callApi(method, params, cb) {
  * Generate API url according to CF API rules
  *
  * @param {array} options - main class options
- * @param {array} params - API url parameters [see doc]
+ * @param {array} parameters - API url parameters [see doc]
  * @returns {string} - final url
  */
-function makeApiUrl(options,params) {
+function makeApiUrl(options,parameters) {
 
     //main query to add in API url request
-    let query = params;
+    let query = parameters;
     let curTime = moment().unix();
     let randomToken = randomstring.generate(6);
 
@@ -141,9 +178,9 @@ function makeApiUrl(options,params) {
     query.apiKey  = options.API_KEY;
 
     //if any parameter given as array, make it string separated by semicolon(;)
-    for(let key in params){
-        if( _.isArray(params[key]) ){
-            params[key] = _.join(params[key],';');
+    for(let key in parameters){
+        if( _.isArray(parameters[key]) ){
+            parameters[key] = _.join(parameters[key],';');
         }
     }
 

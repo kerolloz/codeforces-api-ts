@@ -17,8 +17,6 @@ Codeforces.problemset.recentStatus(params,  (err,result) => {
     }
 
     console.log(result);
-    console.log("yes");
-
 });
 
 

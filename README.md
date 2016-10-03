@@ -49,42 +49,58 @@ Codeforces.user.rating({ handle: 'user_handle' } , function (err, data) {
 
 ### Methods & Parameters
 
+>Full description of the API can be found on : [Official API Doc](http://codeforces.com/api/help)
 
-| Method                   | Parameters                                                  |  Description |
-| -----------------------  | ----------------------------------------------------------- |:-------------------------------------------------------------------:|
-| blogEntry.comments       | blogEntryId                                                 |  [More](http://codeforces.com/api/help/methods#blogEntry.comments)  |
-| blogEntry.view           | blogEntryId                                                 |  [More](http://codeforces.com/api/help/methods#blogEntry.view)  |
-| contest.hacks            | contestId                                                   |  [More](http://codeforces.com/api/help/methods#contest.hacks)  |
-| contest.list             | gym                                                         |  [More](http://codeforces.com/api/help/methods#contest.list)  |
-| contest.ratingChanges    | contestId                                                   |  [More](http://codeforces.com/api/help/methods#contest.ratingChanges)  |
-| contest.standings        | contestId , from , count , handles ,  room , showUnofficial |  [More](http://codeforces.com/api/help/methods#contest.standings)  |
-| contest.status           | contestId , handle , from , count                           |  [More](http://codeforces.com/api/help/methods#contest.status)  |
-| problemset.problems      | tags                                                        |  [More](http://codeforces.com/api/help/methods#problemset.problems )  |
-| problemset.recentStatus  | count                                                       |  [More](http://codeforces.com/api/help/methods#problemset.recentStatus)  |
-| recentActions            | maxCount                                                    |  [More](http://codeforces.com/api/help/methods#recentActions)  |
-| user.blogEntries         | handle                                                      |  [More](http://codeforces.com/api/help/methods#user.blogEntries)  |
-| user.friends             | onlyOnline                                                  |  [More](http://codeforces.com/api/help/methods#user.friends)  |
-| user.info                | handles                                                     |  [More](http://codeforces.com/api/help/methods#user.info)  |
-| user.ratedList           | activeOnly                                                  |  [More](http://codeforces.com/api/help/methods#user.ratedList)  |
-| user.rating              | handle                                                      |  [More](http://codeforces.com/api/help/methods#user.rating)  |
-| user.status              | handle , from , count                                       |  [More](http://codeforces.com/api/help/methods#user.status)  |
+| Method                   | Parameters                                                   |  Description |
+| -----------------------  | ------------------------------------------------------------ |:-------------------------------------------------------------------:|
+| blogEntry.comments       | *blogEntryId                                                 |  [More](http://codeforces.com/api/help/methods#blogEntry.comments)  |
+| blogEntry.view           | *blogEntryId                                                 |  [More](http://codeforces.com/api/help/methods#blogEntry.view)  |
+| contest.hacks            | contestId                                                    |  [More](http://codeforces.com/api/help/methods#contest.hacks)  |
+| contest.list             | gym                                                          |  [More](http://codeforces.com/api/help/methods#contest.list)  |
+| contest.ratingChanges    | *contestId                                                   |  [More](http://codeforces.com/api/help/methods#contest.ratingChanges)  |
+| contest.standings        | *contestId , from , count , handles ,  room , showUnofficial |  [More](http://codeforces.com/api/help/methods#contest.standings)  |
+| contest.status           | *contestId , handle , from , count                           |  [More](http://codeforces.com/api/help/methods#contest.status)  |
+| problemset.problems      | tags                                                         |  [More](http://codeforces.com/api/help/methods#problemset.problems )  |
+| problemset.recentStatus  | *count                                                       |  [More](http://codeforces.com/api/help/methods#problemset.recentStatus)  |
+| recentActions            | *maxCount                                                    |  [More](http://codeforces.com/api/help/methods#recentActions)  |
+| user.blogEntries         | *handle                                                      |  [More](http://codeforces.com/api/help/methods#user.blogEntries)  |
+| user.friends             | onlyOnline                                                   |  [More](http://codeforces.com/api/help/methods#user.friends)  |
+| user.info                | *handles                                                     |  [More](http://codeforces.com/api/help/methods#user.info)  |
+| user.ratedList           | activeOnly                                                   |  [More](http://codeforces.com/api/help/methods#user.ratedList)  |
+| user.rating              | *handle                                                      |  [More](http://codeforces.com/api/help/methods#user.rating)  |
+| user.status              | *handle , from , count                                       |  [More](http://codeforces.com/api/help/methods#user.status)  |
+> *required parameters
+
+#### Note
+**handles** and **tags** can be multiple.There are two different ways to set:
+  1. Semicilon-separated string:
+
+  ```javascript
+  tags: 'greedy;dp;graphs'
+  ```
+
+  2. As array:
+
+  ```javascript
+  tags: ['greedy','dp','graphs']
+  ```
 
 
 ## Authorization
 
- To access data, API key must be needed.To generate API and SECRET KEY visit:  http://codeforces.com/settings/api
- 
- 
+ To access data, API and SECRET key must be needed.To generate API and SECRET KEY visit: [API Settings](http://codeforces.com/settings/api)
+
+
 ## Return Data
 
-  All data return as JSON format.For more details about every data format visit:  http://codeforces.com/api/help/objects
- 
+  All data return in JSON format.For full description of data format visit:  [Return Objects](http://codeforces.com/api/help/objects)
+
 
 
 ## Streaming
 
 >
-> This feature and example from npm **request** pakages. For more have a look : https://github.com/request/request
+> This feature and example from npm **request** package. For more have a look : [Request Package Doc](https://github.com/request/request)
 >
 
 
@@ -92,6 +108,9 @@ You can stream responses to a file stream.When json data is huge, you may need t
 
 ```javascript
 Codeforces.user.ratedList( parameters, callback ).pipe( fs.createWriteStream('./rateedList.json') );
+
+//version >= 1.0.2 (with or without callback)
+Codeforces.user.ratedList( parameters ).pipe( fs.createWriteStream('./ratedList.json') );
 ```
 
 Also emits response events.
