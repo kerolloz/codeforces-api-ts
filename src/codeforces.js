@@ -1,7 +1,6 @@
 "use strict";
 
 import * as _ from "lodash";
-import moment from 'moment';
 import qs from 'qs';
 import randomstring from 'randomstring';
 import Request from 'request/request';
@@ -13,12 +12,11 @@ import sha512 from 'crypto-js/sha512';
  */
 class CF {
 
-    /**
-     * Class constructor, It will Set default routes and options
-     */
     constructor () {
 
-        //credentials for API call
+        //
+        // credentials for API call
+        //
         this.options = {
             API_URL: "http://codeforces.com/api",
             API_KEY: "",
@@ -26,7 +24,10 @@ class CF {
             DEFAULT_TIMEOUT: 60000  //1 minute
         };
 
-        //user method
+
+        //
+        // user method
+        //
         this.user = {
             blogEntries: callApi.bind(this,"user.blogEntries"),
             friends: callApi.bind(this,"user.friends"),
@@ -36,7 +37,10 @@ class CF {
             status: callApi.bind(this,"user.status")
         };
 
-        //contest method
+
+        //
+        // contest method
+        //
         this.contest = {
             hacks: callApi.bind(this,"contest.hacks"),
             list: callApi.bind(this,"contest.list"),
@@ -45,19 +49,28 @@ class CF {
             status: callApi.bind(this,"contest.status")
         };
 
-        //all problemset method
+
+        //
+        // all problemset method
+        //
         this.problemset = {
             problems: callApi.bind(this,"problemset.problems"),
             recentStatus: callApi.bind(this,"problemset.recentStatus")
         };
 
-        //blog method
+
+        //
+        // blog method
+        //
         this.blogEntry = {
             comments: callApi.bind(this,"blogEntry.comments"),
             view: callApi.bind(this,"blogEntry.view")
         };
 
-        //recent news method
+
+        //
+        // recent news method
+        //
         this.recentActions = callApi.bind(this,"recentActions");
     }
 
@@ -75,7 +88,7 @@ class CF {
 
 
 /**
- * About method and parameters, see official doc - http://codeforces.com/api/help/
+ * Send request to api
  *
  * @param {string} method - method of API request.
  * @param {object} parameters - API url parameters
@@ -92,9 +105,9 @@ function callApi(method, parameters, callback) {
         throw new Error('valid parameters object required.');
     }
 
-    let opts = this.options;
+    var opts = this.options;
 
-    let noCallback = !callback || typeof callback !== 'function';
+    var noCallback = !callback || typeof callback !== 'function';
     let noApiKey = typeof opts.API_KEY !== 'string' || opts.API_KEY.length === 0 || typeof opts.API_SECRET !== 'string' || opts.API_SECRET.length === 0;
     if( noApiKey ){
         if( noCallback ){
@@ -105,7 +118,9 @@ function callApi(method, parameters, callback) {
 
     opts.method = method;
 
-    //target API url with hashes
+    //
+    // final API url with hashes
+    //
     let url = makeApiUrl(opts, parameters);
 
     let reqOptions = {
@@ -114,12 +129,17 @@ function callApi(method, parameters, callback) {
         timeout: process.env.CF_TIMEOUT || opts.DEFAULT_TIMEOUT
     };
 
-    //callback not exists, just return the request modules Request class instance for event
+
+    //
+    // callback not exists, just return the request modules Request class instance for event
+    //
     if( noCallback ){
         return new Request(reqOptions);
     }
 
-    //callback exists, return Request for streaming and handle callback for error handling and custom formatted data
+    //
+    // callback exists, return Request for streaming and handle callback for error handling and custom formatted data
+    //
     return callRequest(reqOptions, handleCallback.bind(null,callback) );
 }
 
@@ -139,9 +159,11 @@ function handleCallback(callback, err, httpResponse, body) {
         return callback(err);
     }
 
-    //API returns error
+    //
+    // API returns error
+    //
     if( body.status !== 'OK' ){
-        return callback(body.comment);
+        return callback(new Error(body.comment));
     }
 
     return callback(null, body.result);
@@ -169,27 +191,30 @@ function callRequest(options,callback) {
  */
 function makeApiUrl(options,parameters) {
 
-    //main query to add in API url request
-    let query = parameters;
-    let curTime = moment().unix();
+    var query = parameters;
+
+    //
+    // If any parameter given in array, make it string separated by semicolon(;)
+    //
+    for(let key in query){
+        if( _.isArray(query[key]) ){
+            query[key] = _.join(query[key],';');
+        }
+    }
+
+    let curTime = Math.floor(Date.now() / 1000);
     let randomToken = randomstring.generate(6);
 
     query.time = curTime;
     query.apiKey  = options.API_KEY;
 
-    //if any parameter given as array, make it string separated by semicolon(;)
-    for(let key in parameters){
-        if( _.isArray(parameters[key]) ){
-            parameters[key] = _.join(parameters[key],';');
-        }
-    }
-
-
-    //sort the parameters according to codeforces API rules
+    //
+    // Sort parameters according to codeforces API rules
+    //
     query = _
         .chain(query)
-        .map( function(val, key) {
-            return { key: key, value: val }
+        .map( (value, key) => {
+            return { key, value };
         })
         .orderBy(['key', 'value'], ['desc', 'desc'])
         .reverse()
@@ -197,11 +222,14 @@ function makeApiUrl(options,parameters) {
         .mapValues('value')
         .value();
 
-    let apiSig =  randomToken + '/' + options.method + '?' + qs.stringify(query,{ encode: false }) + '#' + options.API_SECRET;
+    let qsFy = qs.stringify(query,{ encode: false });
+    let apiSig = `${randomToken}/${options.method}?${qsFy}#${options.API_SECRET}`;
+
     apiSig = sha512(apiSig).toString();
     query.apiSig = randomToken + apiSig;
+    qsFy = qs.stringify(query,{ encode: false });
 
-    let url = options.API_URL + '/' + options.method + '?' + qs.stringify(query,{ encode: false });
+    let url = `${options.API_URL}/${options.method}?${qsFy}`;
 
     return url;
 }

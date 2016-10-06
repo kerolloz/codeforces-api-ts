@@ -15,7 +15,6 @@ Codeforces.user.info(parameters, function (err,data) {
         return console.log(err);
     }
     console.log(data);
-    console.log('huha');
 });
 
 /*

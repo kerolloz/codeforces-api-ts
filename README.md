@@ -1,8 +1,9 @@
 # NodeJS Client Library for [Codeforces API](http://codeforces.com/api/help)
 
-[![Build Status](https://travis-ci.org/ahmed-dinar/codeforces-api-node.svg?branch=master)](https://travis-ci.org/ahmed-dinar/codeforces-api-node) 
+[![Build Status](https://travis-ci.org/ahmed-dinar/codeforces-api-node.svg?branch=master)](https://travis-ci.org/ahmed-dinar/codeforces-api-node)
 [![Coverage Status](https://coveralls.io/repos/github/ahmed-dinar/codeforces-api-node/badge.svg?branch=master)](https://coveralls.io/github/ahmed-dinar/codeforces-api-node?branch=master)
 [![npm version](https://badge.fury.io/js/codeforces-api.svg)](https://badge.fury.io/js/codeforces-api)
+[![Dependency Status](https://david-dm.org/ahmed-dinar/codeforces-api-node.svg)](https://david-dm.org/ahmed-dinar/codeforces-api-node)
 
 codeforces-api-node is a simple NodeJS library for Codeforces Api with streaming support.
 
@@ -10,7 +11,7 @@ codeforces-api-node is a simple NodeJS library for Codeforces Api with streaming
   ```
   $ npm install codeforces-api
   ```
-  
+
 ## Usage
 
 codeforces-api-node supports both ES5 and ES6.
@@ -88,7 +89,7 @@ Codeforces.user.rating({ handle: 'user_handle' } , function (err, data) {
 
 ## Authorization
 
- To access data, API and SECRET key must be needed.To generate API and SECRET KEY visit: [API Settings](http://codeforces.com/settings/api)
+ Although most of the method of the API supports anonymously request, ```codeforces-api-node``` does not allow anonymous request yet.To access API data, must set API and SECRET key before calling methods.To generate API and SECRET KEY visit: [API Settings](http://codeforces.com/settings/api)
 
 
 ## Return Data
@@ -107,10 +108,12 @@ Codeforces.user.rating({ handle: 'user_handle' } , function (err, data) {
 You can stream responses to a file stream.When json data is huge, you may need this feature.
 
 ```javascript
-Codeforces.user.ratedList( parameters, callback ).pipe( fs.createWriteStream('./rateedList.json') );
+Codeforces.user.ratedList( parameters, callback )
+               .pipe( fs.createWriteStream('./rateedList.json') );
 
 //version >= 1.0.2 (with or without callback)
-Codeforces.user.ratedList( parameters ).pipe( fs.createWriteStream('./ratedList.json') );
+Codeforces.user.ratedList( parameters )
+               .pipe( fs.createWriteStream('./ratedList.json') );
 ```
 
 Also emits response events.
@@ -119,7 +122,7 @@ Also emits response events.
 Codeforces.user.ratedList( parameters, function(err, data){
 
     if(err){ //request error  }
-    
+
     //data also available here
 
 }).on('data', function(data) {
@@ -133,9 +136,26 @@ Codeforces.user.ratedList( parameters, function(err, data){
         // compressed data as it is received
         console.log('received ' + data.length + ' bytes of compressed data')
     });
-       
+
 }).pipe( fs.createWriteStream('./ratedList.json') );
 ```
+
+## Contributing
+  Everyone wellcome!
+  * Create an issue > [Fork](https://github.com/ahmed-dinar/codeforces-api-node/fork) > Create own branch > Commit changes > Push the branch > Creat pull request
+
+
+## Test
+
+  Before running test, must set API and SECRET key in environment variable.Keys are:
+  ```javascript
+ CFK = API Key
+ CFS = API Secret
+  ```
+  After setting keys, simply run
+  ```javascript
+  npm test
+  ```
 
 ## License
 
