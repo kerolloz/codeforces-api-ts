@@ -1,51 +1,41 @@
 {
-  "name": "codeforces-api",
-  "version": "1.0.3",
-  "description": "Codeforces API Client Library for Node.js",
+  "name": "codeforces-api-ts",
+  "version": "2.0.0",
+  "description": "Codeforces API Client Library for Node.js with Typescript support",
   "main": "dist/codeforces.js",
+  "types": "dist/codeforces.d.ts",
   "scripts": {
-    "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha  --compilers js:babel-register \"test/**/*\"",
-    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | coveralls"
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engine": "node >= 4.0.0",
-  "author": "Ahmed Dinar <madinar.cse@gmail.com>",
+  "author": "Kerollos Magdy <kerolloz@yahoo.com>",
   "private": false,
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.16.0",
-    "babel-register": "^6.16.0",
-    "chai": "^3.5.0",
-    "coveralls": "^2.11.14",
-    "debug": "^2.2.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "mocha": "^3.1.0",
-    "mocha-lcov-reporter": "^1.2.0",
-    "nyc": "^8.3.0"
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.11.18",
+    "@types/qs": "^6.9.7"
   },
   "dependencies": {
-    "crypto-js": "^3.1.6",
-    "lodash": "^4.16.2",
-    "qs": "^6.2.1",
-    "randomstring": "^1.1.5",
-    "request": "^2.75.0"
+    "axios": "^1.2.2",
+    "lodash": "^4.17.21",
+    "qs": "^6.11.0"
   },
-  "homepage": "https://github.com/ahmed-dinar/codeforces-api-node",
+  "homepage": "https://github.com/kerolloz/codeforces-api-node",
   "keywords": [
     "codeforces",
     "codeforces api",
     "api",
     "client",
-    "api client"
+    "api client",
+    "typescript"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahmed-dinar/codeforces-api-node.git"
+    "url": "https://github.com/kerolloz/codeforces-api-node.git"
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/ahmed-dinar/codeforces-api-node/issues"
+    "url": "https://github.com/kerolloz/codeforces-api-node/issues"
   }
 }

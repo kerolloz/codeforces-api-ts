@@ -1,52 +1,53 @@
-# NodeJS Client Library for [Codeforces API](http://codeforces.com/api/help)
+# Codeforces-API-TS
 
-[![Build Status](https://travis-ci.org/ahmed-dinar/codeforces-api-node.svg?branch=master)](https://travis-ci.org/ahmed-dinar/codeforces-api-node)
-[![Coverage Status](https://coveralls.io/repos/github/ahmed-dinar/codeforces-api-node/badge.svg?branch=master)](https://coveralls.io/github/ahmed-dinar/codeforces-api-node?branch=master)
-[![npm version](https://badge.fury.io/js/codeforces-api.svg)](https://badge.fury.io/js/codeforces-api)
-[![Dependency Status](https://david-dm.org/ahmed-dinar/codeforces-api-node.svg)](https://david-dm.org/ahmed-dinar/codeforces-api-node)
+Codeforces-API-TS is a NodeJS Client Library for [Codeforces API](http://codeforces.com/api/help) with Typescript support 💙
 
-codeforces-api-node is a simple NodeJS library for Codeforces Api with streaming support.
+> **Note**
+> Source code in this repo is highly inspired by [Ahmed Dinar's codeforces-api-node](https://github.com/ahmed-dinar/codeforces-api-node)
 
 ## Install
-  ```
-  $ npm install codeforces-api
-  ```
+
+```sh
+npm install codeforces-api-ts
+```
 
 ## Usage
 
-codeforces-api-node supports both ES5 and ES6.
+```typescript
+import { CodeForcesAPI } from "codeforces-api-ts";
 
-#### Basic
+(async () => {
+  CodeForcesAPI.setCredentials({
+    API_KEY: "YOUR_API_KEY",
+    API_SECRET: "YOUR_API_SECRET",
+  });
 
-```javascript
+  // all methods return a promise
+  await CodeForcesAPI.blogEntry.comments({ blogEntryId: 79 });
+  await CodeForcesAPI.blogEntry.view({ blogEntryId: 79 });
+  await CodeForcesAPI.contest.hacks({ contestId: 566 });
+  await CodeForcesAPI.contest.list();
+  await CodeForcesAPI.contest.ratingChanges({ contestId: 566 });
+  await CodeForcesAPI.contest.standings({ contestId: 566 });
+  await CodeForcesAPI.contest.status({ contestId: 566 });
+  await CodeForcesAPI.problemset.problems();
+  await CodeForcesAPI.problemset.recentStatus({ count: 10 });
+  await CodeForcesAPI.recentActions({ maxCount: 10 });
+  await CodeForcesAPI.user.blogEntries({ handle: "kerolloz" });
+  await CodeForcesAPI.user.friends(); // requires authorization
+  await CodeForcesAPI.user.info({ handles: "kerolloz" });
+  await CodeForcesAPI.user.ratedList();
+  await CodeForcesAPI.user.rating({ handle: "kerolloz" });
+  await CodeForcesAPI.user.status({ handle: "kerolloz" });
+})();
 
-//ES5
-var Codeforces = require('codeforces-api');
-
-//ES2015
-import Codeforces from 'codeforces-api';
-
-//set API keys for authentication
-Codeforces.setApis('your_codeforces_api_key', 'your_codeforces_api_secret');
-
-
-Codeforces.method( parameters , callback );
 ```
 
-#### Usage
+## API
 
-```javascript
-Codeforces.user.rating({ handle: 'user_handle' } , function (err, data) {
+The source code is well documented. I tried to make it as simple as possible and followed the same conventions as the official API. You can simply hover over the method name to see the description of the method and its parameters.
 
-    if (err) {
-        //handle error and return
-    }
-
-    //use data
-});
-```
-
-
+You can find function defentions and types in [src/types.ts](src/types.ts)
 
 ### Methods & Parameters
 
@@ -70,93 +71,15 @@ Codeforces.user.rating({ handle: 'user_handle' } , function (err, data) {
 | user.ratedList           | activeOnly                                                   |  [More](http://codeforces.com/api/help/methods#user.ratedList)  |
 | user.rating              | *handle                                                      |  [More](http://codeforces.com/api/help/methods#user.rating)  |
 | user.status              | *handle , from , count                                       |  [More](http://codeforces.com/api/help/methods#user.status)  |
-> *required parameters
-
-#### Note
-**handles** and **tags** can be multiple.There are two different ways to set:
-  1. Semicilon-separated string:
-
-  ```javascript
-  tags: 'greedy;dp;graphs'
-  ```
-
-  2. As array:
-
-  ```javascript
-  tags: ['greedy','dp','graphs']
-  ```
+>*required parameters
 
 
-## Authorization
+### Authorization
 
- Although most of the method of the API supports anonymously request, ```codeforces-api-node``` does not allow anonymous request yet.To access API data, must set API and SECRET key before calling methods.To generate API and SECRET KEY visit: [API Settings](http://codeforces.com/settings/api)
+The only method that requires authorization is `user.friends`. To authorize your requests you need to set your API_KEY and API_SECRET using the `setCredentials` method.
 
+You can get your API key from [codeforces.com/settings/api](http://codeforces.com/settings/api).
 
-## Return Data
+### Return Data
 
-  All data return in JSON format.For full description of data format visit:  [Return Objects](http://codeforces.com/api/help/objects)
-
-
-
-## Streaming
-
->
-> This feature and example from npm **request** package. For more have a look : [Request Package Doc](https://github.com/request/request)
->
-
-
-You can stream responses to a file stream.When json data is huge, you may need this feature.
-
-```javascript
-Codeforces.user.ratedList( parameters, callback )
-               .pipe( fs.createWriteStream('./rateedList.json') );
-
-//version >= 1.0.2 (with or without callback)
-Codeforces.user.ratedList( parameters )
-               .pipe( fs.createWriteStream('./ratedList.json') );
-```
-
-Also emits response events.
-
-```javascript
-Codeforces.user.ratedList( parameters, function(err, data){
-
-    if(err){ //request error  }
-
-    //data also available here
-
-}).on('data', function(data) {
-    // decompressed data as it is received
-    console.log('decoded chunk: ' + data)
-})
-.on('response', function(response) {
-
-    // unmodified http.IncomingMessage object
-    response.on('data', function(data) {
-        // compressed data as it is received
-        console.log('received ' + data.length + ' bytes of compressed data')
-    });
-
-}).pipe( fs.createWriteStream('./ratedList.json') );
-```
-
-## Contributing
-  Everyone wellcome!
-  * Create an issue > [Fork](https://github.com/ahmed-dinar/codeforces-api-node/fork) > Create own branch > Commit changes > Push the branch > Creat pull request
-
-
-## Test
-
-  Before running test, must set API and SECRET key in environment variable.Keys are:
-  ```javascript
- CFK = API Key
- CFS = API Secret
-  ```
-  After setting keys, simply run
-  ```javascript
-  npm test
-  ```
-
-## License
-
-##### MIT © [Ahmed Dinar](https://ahmeddinar.com/)
+All data return in JSON format. For full description of data format visit: [Return Objects](http://codeforces.com/api/help/objects)
