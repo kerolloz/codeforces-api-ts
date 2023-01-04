@@ -9,3 +9,4 @@ coverage
 .babelrc
 .git
 gulpfile.js
+tsconfig.json
