@@ -1,6 +1,6 @@
 src
 .idea
-test
+tests
 node_modules
 npm-debug.log
 .travis.yml
