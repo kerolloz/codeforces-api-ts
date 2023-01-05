@@ -1,6 +1,6 @@
 # Codeforces-API-TS
 
-Codeforces-API-TS is a NodeJS Client Library for [Codeforces API](http://codeforces.com/api/help) with Typescript support 💙
+Codeforces-API-TS is a NodeJS Client Library for [Codeforces API](http://codeforces.com/apiHelp) with Typescript support 💙
 
 > **Note**  
 > Source code in this repo is heavily inspired by [ahmed-dinar/codeforces-api-node](https://github.com/ahmed-dinar/codeforces-api-node).
@@ -51,26 +51,26 @@ You can find function defentions and types in [src/types.ts](src/types.ts)
 
 ### Methods & Parameters
 
->Full description of the API can be found on : [Official API Doc](http://codeforces.com/api/help)
+>Full description of the API can be found on : [Official API Doc](http://codeforces.com/apiHelp)
 
 | Method                   | Parameters                                                   |  Description |
 | -----------------------  | :----------------------------------------------------------: |:-------------------------------------------------------------------:|
-| blogEntry.comments       | *blogEntryId                                                 |  [More](http://codeforces.com/api/help/methods#blogEntry.comments)  |
-| blogEntry.view           | *blogEntryId                                                 |  [More](http://codeforces.com/api/help/methods#blogEntry.view)  |
-| contest.hacks            | contestId                                                    |  [More](http://codeforces.com/api/help/methods#contest.hacks)  |
-| contest.list             | gym                                                          |  [More](http://codeforces.com/api/help/methods#contest.list)  |
-| contest.ratingChanges    | *contestId                                                   |  [More](http://codeforces.com/api/help/methods#contest.ratingChanges)  |
-| contest.standings        | *contestId , from , count , handles ,  room , showUnofficial |  [More](http://codeforces.com/api/help/methods#contest.standings)  |
-| contest.status           | *contestId , handle , from , count                           |  [More](http://codeforces.com/api/help/methods#contest.status)  |
-| problemset.problems      | tags                                                         |  [More](http://codeforces.com/api/help/methods#problemset.problems )  |
-| problemset.recentStatus  | *count                                                       |  [More](http://codeforces.com/api/help/methods#problemset.recentStatus)  |
-| recentActions            | *maxCount                                                    |  [More](http://codeforces.com/api/help/methods#recentActions)  |
-| user.blogEntries         | *handle                                                      |  [More](http://codeforces.com/api/help/methods#user.blogEntries)  |
-| user.friends             | onlyOnline                                                   |  [More](http://codeforces.com/api/help/methods#user.friends)  |
-| user.info                | *handles                                                     |  [More](http://codeforces.com/api/help/methods#user.info)  |
-| user.ratedList           | activeOnly                                                   |  [More](http://codeforces.com/api/help/methods#user.ratedList)  |
-| user.rating              | *handle                                                      |  [More](http://codeforces.com/api/help/methods#user.rating)  |
-| user.status              | *handle , from , count                                       |  [More](http://codeforces.com/api/help/methods#user.status)  |
+| blogEntry.comments       | *blogEntryId                                                 |  [More](http://codeforces.com/apiHelp/methods#blogEntry.comments)  |
+| blogEntry.view           | *blogEntryId                                                 |  [More](http://codeforces.com/apiHelp/methods#blogEntry.view)  |
+| contest.hacks            | contestId                                                    |  [More](http://codeforces.com/apiHelp/methods#contest.hacks)  |
+| contest.list             | gym                                                          |  [More](http://codeforces.com/apiHelp/methods#contest.list)  |
+| contest.ratingChanges    | *contestId                                                   |  [More](http://codeforces.com/apiHelp/methods#contest.ratingChanges)  |
+| contest.standings        | *contestId , from , count , handles ,  room , showUnofficial |  [More](http://codeforces.com/apiHelp/methods#contest.standings)  |
+| contest.status           | *contestId , handle , from , count                           |  [More](http://codeforces.com/apiHelp/methods#contest.status)  |
+| problemset.problems      | tags                                                         |  [More](http://codeforces.com/apiHelp/methods#problemset.problems )  |
+| problemset.recentStatus  | *count                                                       |  [More](http://codeforces.com/apiHelp/methods#problemset.recentStatus)  |
+| recentActions            | *maxCount                                                    |  [More](http://codeforces.com/apiHelp/methods#recentActions)  |
+| user.blogEntries         | *handle                                                      |  [More](http://codeforces.com/apiHelp/methods#user.blogEntries)  |
+| user.friends             | onlyOnline                                                   |  [More](http://codeforces.com/apiHelp/methods#user.friends)  |
+| user.info                | *handles                                                     |  [More](http://codeforces.com/apiHelp/methods#user.info)  |
+| user.ratedList           | activeOnly                                                   |  [More](http://codeforces.com/apiHelp/methods#user.ratedList)  |
+| user.rating              | *handle                                                      |  [More](http://codeforces.com/apiHelp/methods#user.rating)  |
+| user.status              | *handle , from , count                                       |  [More](http://codeforces.com/apiHelp/methods#user.status)  |
 >*required parameters
 
 
@@ -82,4 +82,4 @@ You can get your API key from [codeforces.com/settings/api](http://codeforces.co
 
 ### Return Data
 
-All data return in JSON format. For full description of data format visit: [Return Objects](http://codeforces.com/api/help/objects)
+All data return in JSON format. For full description of data format visit: [Return Objects](http://codeforces.com/apiHelp/objects)
