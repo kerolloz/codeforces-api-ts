@@ -2,8 +2,8 @@
 
 Codeforces-API-TS is a NodeJS Client Library for [Codeforces API](http://codeforces.com/api/help) with Typescript support 💙
 
-> **Note**
-> Source code in this repo is highly inspired by [Ahmed Dinar's codeforces-api-node](https://github.com/ahmed-dinar/codeforces-api-node)
+> **Note**  
+> Source code in this repo is heavily inspired by [ahmed-dinar/codeforces-api-node](https://github.com/ahmed-dinar/codeforces-api-node).
 
 ## Install
 
@@ -54,7 +54,7 @@ You can find function defentions and types in [src/types.ts](src/types.ts)
 >Full description of the API can be found on : [Official API Doc](http://codeforces.com/api/help)
 
 | Method                   | Parameters                                                   |  Description |
-| -----------------------  | ------------------------------------------------------------ |:-------------------------------------------------------------------:|
+| -----------------------  | :----------------------------------------------------------: |:-------------------------------------------------------------------:|
 | blogEntry.comments       | *blogEntryId                                                 |  [More](http://codeforces.com/api/help/methods#blogEntry.comments)  |
 | blogEntry.view           | *blogEntryId                                                 |  [More](http://codeforces.com/api/help/methods#blogEntry.view)  |
 | contest.hacks            | contestId                                                    |  [More](http://codeforces.com/api/help/methods#contest.hacks)  |
