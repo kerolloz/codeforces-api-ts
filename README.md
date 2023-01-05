@@ -1,4 +1,8 @@
-# Codeforces-API-TS
+# Codeforces-API-TS <a target="_blank" href="https://kounter.tk"><img align="right" src="https://t.ly/EoLB" /></a>
+
+[![npm version](https://badge.fury.io/js/codeforces-api-ts.svg)](https://www.npmjs.com/package/codeforces-api-ts)
+[![npm downloads](https://img.shields.io/npm/dw/codeforces-api-ts)](https://www.npmjs.com/package/codeforces-api-ts)
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
 Codeforces-API-TS is a NodeJS Client Library for [Codeforces API](http://codeforces.com/apiHelp) with Typescript support 💙
 
@@ -51,35 +55,34 @@ You can find function defentions and types in [src/types.ts](src/types.ts)
 
 ### Methods & Parameters
 
->Full description of the API can be found on : [Official API Doc](http://codeforces.com/apiHelp)
+>Full description of the API can be found on <http://codeforces.com/apiHelp>.
 
-| Method                   | Parameters                                                   |  Description |
-| -----------------------  | :----------------------------------------------------------: |:-------------------------------------------------------------------:|
-| blogEntry.comments       | *blogEntryId                                                 |  [More](http://codeforces.com/apiHelp/methods#blogEntry.comments)  |
-| blogEntry.view           | *blogEntryId                                                 |  [More](http://codeforces.com/apiHelp/methods#blogEntry.view)  |
-| contest.hacks            | contestId                                                    |  [More](http://codeforces.com/apiHelp/methods#contest.hacks)  |
-| contest.list             | gym                                                          |  [More](http://codeforces.com/apiHelp/methods#contest.list)  |
-| contest.ratingChanges    | *contestId                                                   |  [More](http://codeforces.com/apiHelp/methods#contest.ratingChanges)  |
-| contest.standings        | *contestId , from , count , handles ,  room , showUnofficial |  [More](http://codeforces.com/apiHelp/methods#contest.standings)  |
-| contest.status           | *contestId , handle , from , count                           |  [More](http://codeforces.com/apiHelp/methods#contest.status)  |
-| problemset.problems      | tags                                                         |  [More](http://codeforces.com/apiHelp/methods#problemset.problems )  |
-| problemset.recentStatus  | *count                                                       |  [More](http://codeforces.com/apiHelp/methods#problemset.recentStatus)  |
-| recentActions            | *maxCount                                                    |  [More](http://codeforces.com/apiHelp/methods#recentActions)  |
-| user.blogEntries         | *handle                                                      |  [More](http://codeforces.com/apiHelp/methods#user.blogEntries)  |
-| user.friends             | onlyOnline                                                   |  [More](http://codeforces.com/apiHelp/methods#user.friends)  |
-| user.info                | *handles                                                     |  [More](http://codeforces.com/apiHelp/methods#user.info)  |
-| user.ratedList           | activeOnly                                                   |  [More](http://codeforces.com/apiHelp/methods#user.ratedList)  |
-| user.rating              | *handle                                                      |  [More](http://codeforces.com/apiHelp/methods#user.rating)  |
-| user.status              | *handle , from , count                                       |  [More](http://codeforces.com/apiHelp/methods#user.status)  |
+| Method                                                                                | Parameters                                                   |  
+| ------------------------------------------------------------------------------------  | ----------------------------------------------------------: |
+| [blogEntry.comments](http://codeforces.com/apiHelp/methods#blogEntry.comments)        | *blogEntryId                                                 |
+| [blogEntry.view](http://codeforces.com/apiHelp/methods#blogEntry.view)                | *blogEntryId                                                 |
+| [contest.hacks](http://codeforces.com/apiHelp/methods#contest.hacks)                  | *contestId                                                   |
+| [contest.list](http://codeforces.com/apiHelp/methods#contest.list)                    | gym                                                          |
+| [contest.ratingChanges](http://codeforces.com/apiHelp/methods#contest.ratingChanges)  | *contestId                                                   |
+| [contest.standings](http://codeforces.com/apiHelp/methods#contest.standings)          | *contestId , from , count , handles ,  room , showUnofficial |
+| [contest.status](http://codeforces.com/apiHelp/methods#contest.status)                | *contestId , handle , from , count                           |
+| [problemset.problems](http://codeforces.com/apiHelp/methods#problemset.problems)      | tags, problemsetName                                         |
+| [problemset.recentStatus](http://codeforces.com/apiHelp/methods#recentActions)        | *count, problemsetName                                       |
+| [recentActions](http://codeforces.com/apiHelp/methods#user.blogEntries)               | *maxCount                                                    |
+| [user.blogEntries](http://codeforces.com/apiHelp/methods#user.friends)                | *handle                                                      |
+| [user.friends](http://codeforces.com/apiHelp/methods#user.info)                       | onlyOnline                                                   |
+| [user.info](http://codeforces.com/apiHelp/methods#user.ratedList)                     | *handles                                                     |
+| [user.ratedList](http://codeforces.com/apiHelp/methods#user.rating)                   | activeOnly, includeRetired, contestId                        |
+| [user.rating](http://codeforces.com/apiHelp/methods#user.status)                      | *handle                                                      |
+| [user.status](http://codeforces.com/apiHelp/methods#problemset.recentStatus)          | *handle , from , count                                       |
 >*required parameters
-
 
 ### Authorization
 
 The only method that requires authorization is `user.friends`. To authorize your requests you need to set your API_KEY and API_SECRET using the `setCredentials` method.
 
-You can get your API key from [codeforces.com/settings/api](http://codeforces.com/settings/api).
+You can get your API key from <http://codeforces.com/settings/api>.
 
 ### Return Data
 
-All data return in JSON format. For full description of data format visit: [Return Objects](http://codeforces.com/apiHelp/objects)
+Data is returned in JSON format. For full description of data format visit <http://codeforces.com/apiHelp/objects>.
