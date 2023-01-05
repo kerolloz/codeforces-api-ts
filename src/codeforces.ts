@@ -2,6 +2,7 @@ import axios from "axios";
 import crypto from "crypto";
 import _ from "lodash";
 import qs from "qs";
+import "./types";
 
 /**
  * Main API class

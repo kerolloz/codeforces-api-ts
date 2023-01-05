@@ -1,9 +1,8 @@
 {
   "name": "codeforces-api-ts",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Codeforces API Client Library for Node.js with Typescript support",
   "main": "dist/codeforces.js",
-  "types": "dist/codeforces.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
