@@ -57,24 +57,24 @@ You can find function defentions and types in [src/types.ts](src/types.ts)
 
 >Full description of the API can be found on <http://codeforces.com/apiHelp>.
 
-| Method                                                                                | Parameters                                                   |  
-| ------------------------------------------------------------------------------------  | ----------------------------------------------------------: |
-| [blogEntry.comments](http://codeforces.com/apiHelp/methods#blogEntry.comments)        | *blogEntryId                                                 |
-| [blogEntry.view](http://codeforces.com/apiHelp/methods#blogEntry.view)                | *blogEntryId                                                 |
-| [contest.hacks](http://codeforces.com/apiHelp/methods#contest.hacks)                  | *contestId                                                   |
-| [contest.list](http://codeforces.com/apiHelp/methods#contest.list)                    | gym                                                          |
-| [contest.ratingChanges](http://codeforces.com/apiHelp/methods#contest.ratingChanges)  | *contestId                                                   |
-| [contest.standings](http://codeforces.com/apiHelp/methods#contest.standings)          | *contestId , from , count , handles ,  room , showUnofficial |
-| [contest.status](http://codeforces.com/apiHelp/methods#contest.status)                | *contestId , handle , from , count                           |
-| [problemset.problems](http://codeforces.com/apiHelp/methods#problemset.problems)      | tags, problemsetName                                         |
-| [problemset.recentStatus](http://codeforces.com/apiHelp/methods#recentActions)        | *count, problemsetName                                       |
-| [recentActions](http://codeforces.com/apiHelp/methods#user.blogEntries)               | *maxCount                                                    |
-| [user.blogEntries](http://codeforces.com/apiHelp/methods#user.friends)                | *handle                                                      |
-| [user.friends](http://codeforces.com/apiHelp/methods#user.info)                       | onlyOnline                                                   |
-| [user.info](http://codeforces.com/apiHelp/methods#user.ratedList)                     | *handles                                                     |
-| [user.ratedList](http://codeforces.com/apiHelp/methods#user.rating)                   | activeOnly, includeRetired, contestId                        |
-| [user.rating](http://codeforces.com/apiHelp/methods#user.status)                      | *handle                                                      |
-| [user.status](http://codeforces.com/apiHelp/methods#problemset.recentStatus)          | *handle , from , count                                       |
+| Method                                                                                   | Parameters                                                   |  
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [blogEntry.comments](http://codeforces.com/apiHelp/methods#blogEntry.comments)           | **\*blogEntryId**                                            |
+| [blogEntry.view](http://codeforces.com/apiHelp/methods#blogEntry.view)                   | **\*blogEntryId**                                            |
+| [contest.hacks](http://codeforces.com/apiHelp/methods#contest.hacks)                     | **\*contestId**                                              |
+| [contest.list](http://codeforces.com/apiHelp/methods#contest.list)                       | gym                                                          |
+| [contest.ratingChanges](http://codeforces.com/apiHelp/methods#contest.ratingChanges)     | **\*contestId**                                              |
+| [contest.standings](http://codeforces.com/apiHelp/methods#contest.standings)             | **\*contestId**, from, count, handles,  room, showUnofficial |
+| [contest.status](http://codeforces.com/apiHelp/methods#contest.status)                   | **\*contestId**, handle, from, count                         |
+| [problemset.problems](http://codeforces.com/apiHelp/methods#problemset.problems)         | tags, problemsetName                                         |
+| [problemset.recentStatus](http://codeforces.com/apiHelp/methods#problemset.recentStatus) | **\*count**, problemsetName                                  |
+| [recentActions](http://codeforces.com/apiHelp/methods#recentActions)                     | **\*maxCount**                                               |
+| [user.blogEntries](http://codeforces.com/apiHelp/methods#user.blogEntries)               | **\*handle**                                                 |
+| [user.friends](http://codeforces.com/apiHelp/methods#user.friends)                       | onlyOnline                                                   |
+| [user.info](http://codeforces.com/apiHelp/methods#user.info)                             | **\*handles**                                                |
+| [user.ratedList](http://codeforces.com/apiHelp/methods#user.ratedList)                   | activeOnly, includeRetired, contestId                        |
+| [user.rating](http://codeforces.com/apiHelp/methods#user.rating)                         | **\*handle**                                                 |
+| [user.status](http://codeforces.com/apiHelp/methods#user.status)                         | **\*handle**, from, count                                    |
 >*required parameters
 
 ### Authorization
