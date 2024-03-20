@@ -220,7 +220,7 @@ describe("Codeforces", function () {
         it("should successfully return json with array of handles", function (done) {
           CodeForcesAPI.contest.standings({
             contestId: 1,
-            handles: ["Gullesnuffs", "uwi"].join(','),
+            handles: ["Gullesnuffs", "uwi"].join(';'),
             from: 1,
             count: 2,
             showUnofficial: true,
@@ -265,7 +265,7 @@ describe("Codeforces", function () {
 
         it("should successfully return json with array of tags", function (done) {
           CodeForcesAPI.problemset.problems({
-            tags: ["probabilities", "two pointers"].join(','),
+            tags: ["probabilities", "two pointers"].join(';'),
           });
         });
       });
@@ -334,7 +334,7 @@ describe("Codeforces", function () {
       });
 
       it("should successfully return json when array of handles passed", function (done) {
-        CodeForcesAPI.user.info({ handles: ["Fefer_Ivan", "DmitriyH"].join(',') });
+        CodeForcesAPI.user.info({ handles: ["Fefer_Ivan", "DmitriyH"].join(';') });
       });
     });
 
