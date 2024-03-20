@@ -242,11 +242,13 @@ function makeApiUrl(options: any, parameters: any): string {
     .value();
 
   let qsFy = qs.stringify(query, { encode: false });
-  let apiSig = `${randomToken}/${options.method}?${qsFy}#${options.API_SECRET}`;
 
-  apiSig = crypto.createHash("sha512").update(apiSig).digest("hex");
-  query.apiSig = randomToken + apiSig;
-  qsFy = qs.stringify(query, { encode: false });
+  if (options.API_KEY && options.API_SECRET) {
+    let apiSig = `${randomToken}/${options.method}?${qsFy}#${options.API_SECRET}`;
+    apiSig = crypto.createHash("sha512").update(apiSig).digest("hex");
+    query.apiSig = randomToken + apiSig;
+    qsFy = qs.stringify(query, { encode: false });
+  }
 
   const url = `${options.API_URL}/${options.method}?${qsFy}`;
 

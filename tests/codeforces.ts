@@ -96,6 +96,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return a BlogEntry when blogEntryId is empty", async function (done) {
+          // @ts-expect-error
           const response = await CodeForcesAPI.blogEntry.comments({});
           expect(response).to.be.an("object").with.property("comments");
         });
@@ -116,6 +117,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return error when blogEntryId is empty", function (done) {
+          // @ts-expect-error
           CodeForcesAPI.blogEntry.view({});
         });
 
@@ -138,6 +140,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return error when contestId is empty", function (done) {
+          // @ts-expect-error
           CodeForcesAPI.contest.hacks({});
         });
 
@@ -162,6 +165,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return error when contestId is empty", function (done) {
+          // @ts-expect-error
           CodeForcesAPI.contest.ratingChanges({});
         });
 
@@ -180,6 +184,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return error when contestId empty", function (done) {
+          // @ts-expect-error
           CodeForcesAPI.contest.standings({});
         });
 
@@ -215,7 +220,7 @@ describe("Codeforces", function () {
         it("should successfully return json with array of handles", function (done) {
           CodeForcesAPI.contest.standings({
             contestId: 1,
-            handles: ["Gullesnuffs", "uwi"],
+            handles: ["Gullesnuffs", "uwi"].join(','),
             from: 1,
             count: 2,
             showUnofficial: true,
@@ -227,6 +232,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return error when contestId empty", function (done) {
+          // @ts-expect-error
           CodeForcesAPI.contest.status({});
         });
 
@@ -259,7 +265,7 @@ describe("Codeforces", function () {
 
         it("should successfully return json with array of tags", function (done) {
           CodeForcesAPI.problemset.problems({
-            tags: ["probabilities", "two pointers"],
+            tags: ["probabilities", "two pointers"].join(','),
           });
         });
       });
@@ -268,6 +274,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return error when count is empty", function (done) {
+          // @ts-expect-error
           CodeForcesAPI.problemset.recentStatus({});
         });
 
@@ -281,6 +288,7 @@ describe("Codeforces", function () {
       this.timeout(TEST_TIMEOUT);
 
       it("should return error when maxCount  is empty", function (done) {
+        // @ts-expect-error
         CodeForcesAPI.recentActions({});
       });
 
@@ -294,6 +302,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return error when handle is empty", function (done) {
+          // @ts-expect-error
           CodeForcesAPI.user.blogEntries({});
         });
 
@@ -325,7 +334,7 @@ describe("Codeforces", function () {
       });
 
       it("should successfully return json when array of handles passed", function (done) {
-        CodeForcesAPI.user.info({ handles: ["Fefer_Ivan", "DmitriyH"] });
+        CodeForcesAPI.user.info({ handles: ["Fefer_Ivan", "DmitriyH"].join(',') });
       });
     });
 
@@ -348,6 +357,7 @@ describe("Codeforces", function () {
       this.timeout(TEST_TIMEOUT);
 
       it("should return error when handle is empty", function (done) {
+        // @ts-expect-error
         CodeForcesAPI.user.rating({});
       });
 
@@ -359,6 +369,7 @@ describe("Codeforces", function () {
         this.timeout(TEST_TIMEOUT);
 
         it("should return error when handle is empty", function (done) {
+          // @ts-expect-error
           CodeForcesAPI.user.status({});
         });
 
