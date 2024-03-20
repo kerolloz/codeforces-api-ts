@@ -341,11 +341,11 @@ type Contest = {
   name: string;
   type: "CF" | "IOI" | "ICPC";
   phase:
-    | "BEFORE"
-    | "CODING"
-    | "PENDING_SYSTEM_TEST"
-    | "SYSTEM_TEST"
-    | "FINISHED";
+  | "BEFORE"
+  | "CODING"
+  | "PENDING_SYSTEM_TEST"
+  | "SYSTEM_TEST"
+  | "FINISHED";
   frozen: boolean;
   durationSeconds: number;
   startTimeSeconds?: number;
@@ -376,11 +376,11 @@ type Party = {
   contestId?: number;
   members: Member[];
   participantType:
-    | "CONTESTANT"
-    | "PRACTICE"
-    | "VIRTUAL"
-    | "MANAGER"
-    | "OUT_OF_COMPETITION";
+  | "CONTESTANT"
+  | "PRACTICE"
+  | "VIRTUAL"
+  | "MANAGER"
+  | "OUT_OF_COMPETITION";
   teamId?: number;
   teamName?: string;
   ghost: boolean;
@@ -457,38 +457,38 @@ type Submission = {
   author: Party;
   programmingLanguage: string;
   verdict?:
-    | "FAILED"
-    | "OK"
-    | "PARTIAL"
-    | "COMPILATION_ERROR"
-    | "RUNTIME_ERROR"
-    | "WRONG_ANSWER"
-    | "PRESENTATION_ERROR"
-    | "TIME_LIMIT_EXCEEDED"
-    | "MEMORY_LIMIT_EXCEEDED"
-    | "IDLENESS_LIMIT_EXCEEDED"
-    | "SECURITY_VIOLATED"
-    | "CRASHED"
-    | "INPUT_PREPARATION_CRASHED"
-    | "CHALLENGED"
-    | "SKIPPED"
-    | "TESTING"
-    | "REJECTED";
+  | "FAILED"
+  | "OK"
+  | "PARTIAL"
+  | "COMPILATION_ERROR"
+  | "RUNTIME_ERROR"
+  | "WRONG_ANSWER"
+  | "PRESENTATION_ERROR"
+  | "TIME_LIMIT_EXCEEDED"
+  | "MEMORY_LIMIT_EXCEEDED"
+  | "IDLENESS_LIMIT_EXCEEDED"
+  | "SECURITY_VIOLATED"
+  | "CRASHED"
+  | "INPUT_PREPARATION_CRASHED"
+  | "CHALLENGED"
+  | "SKIPPED"
+  | "TESTING"
+  | "REJECTED";
   testset:
-    | "SAMPLES"
-    | "PRETESTS"
-    | "TESTS"
-    | "CHALLENGES"
-    | "TESTS1"
-    | "TESTS2"
-    | "TESTS3"
-    | "TESTS4"
-    | "TESTS5"
-    | "TESTS6"
-    | "TESTS7"
-    | "TESTS8"
-    | "TESTS9"
-    | "TESTS10";
+  | "SAMPLES"
+  | "PRETESTS"
+  | "TESTS"
+  | "CHALLENGES"
+  | "TESTS1"
+  | "TESTS2"
+  | "TESTS3"
+  | "TESTS4"
+  | "TESTS5"
+  | "TESTS6"
+  | "TESTS7"
+  | "TESTS8"
+  | "TESTS9"
+  | "TESTS10";
   passedTestCount: number;
   timeConsumedMillis: number;
   memoryConsumedBytes: number;
@@ -512,14 +512,14 @@ type Hack = {
   hacker: Party;
   defender: Party;
   verdict?:
-    | "HACK_SUCCESSFUL"
-    | "HACK_UNSUCCESSFUL"
-    | "INVALID_INPUT"
-    | "GENERATOR_INCOMPILABLE"
-    | "GENERATOR_CRASHED"
-    | "IGNORED"
-    | "TESTING"
-    | "OTHER";
+  | "HACK_SUCCESSFUL"
+  | "HACK_UNSUCCESSFUL"
+  | "INVALID_INPUT"
+  | "GENERATOR_INCOMPILABLE"
+  | "GENERATOR_CRASHED"
+  | "IGNORED"
+  | "TESTING"
+  | "OTHER";
   problem: Problem;
   test?: string;
   judgeProtocol?: {
@@ -569,7 +569,7 @@ type ProblemResult = {
 
 // ------ CODEFORCES API RESPONSE TYPES ------
 
-type CodeforcesResponse<T> = { status: string; result: T };
+type CodeforcesResponse<T> = { status: "OK"; result: T } | { status: "FAILED", comment: string };
 
 // ------ Custom types ------
 
