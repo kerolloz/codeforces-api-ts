@@ -1,21 +1,21 @@
 //  ------- PARAMS TYPES -------
 // https://codeforces.com/apiHelp/methods
 
-type BlogEntryCommentsParams = {
+export type BlogEntryCommentsParams = {
   /**
    * Id of the blog entry. It can be seen in blog entry URL. For example: /blog/entry/79
    */
   blogEntryId: number;
 };
 
-type BlogEntryViewParams = {
+export type BlogEntryViewParams = {
   /**
    * Id of the blog entry. It can be seen in blog entry URL. For example: /blog/entry/79
    */
   blogEntryId: number;
 };
 
-type ContestHacksParams = {
+export type ContestHacksParams = {
   /**
    * Id of the contest.
    * It is not the round number. It can be seen in contest URL. For example: /contest/566/status
@@ -23,14 +23,14 @@ type ContestHacksParams = {
   contestId: number;
 };
 
-type ContestListParams = {
+export type ContestListParams = {
   /**
    * Boolean. If true — than gym contests are returned. Otherwide, regular contests are returned.
    */
   gym?: boolean;
 };
 
-type ContestRatingChangesParams = {
+export type ContestRatingChangesParams = {
   /**
    * Id of the contest.
    * It is not the round number. It can be seen in contest URL. For example: /contest/566/status
@@ -38,7 +38,7 @@ type ContestRatingChangesParams = {
   contestId: number;
 };
 
-type ContestStandingsParams = {
+export type ContestStandingsParams = {
   /**
    * Id of the contest.
    * It is not the round number. It can be seen in contest URL. For example: /contest/566/status
@@ -71,7 +71,7 @@ type ContestStandingsParams = {
   showUnofficial?: boolean;
 };
 
-type ContestStatusParams = {
+export type ContestStatusParams = {
   /**
    * Id of the contest.
    * It is not the round number. It can be seen in contest URL. For example: /contest/566/status
@@ -94,7 +94,7 @@ type ContestStatusParams = {
   count?: number;
 };
 
-type ProblemsetProblemsParams = {
+export type ProblemsetProblemsParams = {
   /**
    * Semicilon-separated list of tags.
    */
@@ -106,7 +106,7 @@ type ProblemsetProblemsParams = {
   problemsetName?: string;
 };
 
-type ProblemsetRecentStatusParams = {
+export type ProblemsetRecentStatusParams = {
   /**
    * Number of submissions to return. Can be up to 1000.
    */
@@ -118,35 +118,35 @@ type ProblemsetRecentStatusParams = {
   problemsetName?: string;
 };
 
-type RecentActionsParams = {
+export type RecentActionsParams = {
   /**
    * Number of recent actions to return. Can be up to 100.
    */
   maxCount: number;
 };
 
-type UserBlogEntriesParams = {
+export type UserBlogEntriesParams = {
   /**
    * Codeforces user handle.
    */
   handle: string;
 };
 
-type UserFriendsParams = {
+export type UserFriendsParams = {
   /**
    * Boolean. If true — only online friends are returned. Otherwise, all friends are returned.
    */
   onlyOnline?: boolean;
 };
 
-type UserInfoParams = {
+export type UserInfoParams = {
   /**
    * Semicolon-separated list of handles. No more than 10000 handles is accepted.
    */
   handles: string;
 };
 
-type UserRatedListParams = {
+export type UserRatedListParams = {
   /**
    * Boolean. If true then only users, who participated in rated contest during the last month are returned. Otherwise, all users with at least one rated contest are returned.
    */
@@ -163,14 +163,14 @@ type UserRatedListParams = {
   contestId?: number;
 };
 
-type UserRatingParams = {
+export type UserRatingParams = {
   /**
    * Codeforces user handle.
    */
   handle: string;
 };
 
-type UserStatusParams = {
+export type UserStatusParams = {
   /**
    * Codeforces user handle.
    */
@@ -212,7 +212,7 @@ type UserStatusParams = {
  * @field {avatar}	String. User's avatar URL.
  * @field {titlePhoto}	String. User's title photo URL.
  */
-type User = {
+export type User = {
   handle: string;
   email?: string;
   vkId?: string;
@@ -247,7 +247,7 @@ type User = {
  * @field {allowViewHistory}	Boolean. If true, you can view any specific revision of the blog entry.
  * @field {tags}	String list.
  */
-type BlogEntry = {
+export type BlogEntry = {
   id: number;
   originalLocale: string;
   creationTimeSeconds: number;
@@ -271,7 +271,7 @@ type BlogEntry = {
  * @field {parentCommentId}	Integer. Can be absent.
  * @field {rating}	Integer.
  */
-type CodeforcesBlogComment = {
+export type CodeforcesBlogComment = {
   id: number;
   creationTimeSeconds: number;
   commentatorHandle: string;
@@ -288,7 +288,7 @@ type CodeforcesBlogComment = {
   * @field {blogEntry}	BlogEntry object in short form. Can be absent.
   * @field {comment}	CodeforcesBlogComment object. Can be absent.
   */
-type RecentAction = {
+export type RecentAction = {
   timeSeconds: number;
   blogEntry?: BlogEntry;
   comment?: CodeforcesBlogComment;
@@ -305,7 +305,7 @@ type RecentAction = {
  * @field {oldRating}	Integer. User rating before the contest.
  * @field {newRating}	Integer. User rating after the contest.
  */
-type RatingChange = {
+export type RatingChange = {
   contestId: number;
   contestName: string;
   handle: string;
@@ -336,7 +336,7 @@ type RatingChange = {
  * @field {city}	String. Localized. Can be absent.
  * @field {season}	String. Can be absent.
  */
-type Contest = {
+export type Contest = {
   id: number;
   name: string;
   type: "CF" | "IOI" | "ICPC";
@@ -372,7 +372,7 @@ type Contest = {
  * @field {room}	Integer. Can be absent. Room of the party. If absent, then the party has no room.
  * @field {startTimeSeconds}	Integer. Can be absent. Time, when this party started a contest.
  */
-type Party = {
+export type Party = {
   contestId?: number;
   members: Member[];
   participantType:
@@ -393,7 +393,7 @@ type Party = {
  * @field {handle}	String. Codeforces user handle.
  * @field {name}	String. Can be absent. User's name if available.
  */
-type Member = {
+export type Member = {
   handle: string;
   name?: string;
 };
@@ -409,7 +409,7 @@ type Member = {
  * @field {rating}	Integer. Can be absent. Problem rating (difficulty).
  * @field {tags}	String list. Problem tags.
  */
-type Problem = {
+export type Problem = {
   contestId?: number;
   problemsetName?: string;
   index: string;
@@ -426,7 +426,7 @@ type Problem = {
  * @field {index}	String. Usually, a letter or letter with digit(s) indicating the problem index in a contest.
  * @field {solvedCount}	Integer. Number of users, who solved the problem.
  */
-type ProblemStatistics = {
+export type ProblemStatistics = {
   contestId?: number;
   index: string;
   solvedCount: number;
@@ -448,7 +448,7 @@ type ProblemStatistics = {
  * @file {memoryConsumedBytes}	Integer. Maximum memory in bytes, consumed by solution for one test.
  * @file {points}	Floating point number. Can be absent. Number of scored points for IOI-like contests.
  */
-type Submission = {
+export type Submission = {
   id: number;
   contestId?: number;
   creationTimeSeconds: number;
@@ -506,7 +506,7 @@ type Submission = {
  * @field {test}	String. Can be absent.
  * @field {judgeProtocol}	Object with three fields: "manual", "protocol" and "verdict". Field manual can have values "true" and "false". If manual is "true" then test for the hack was entered manually. Fields "protocol" and "verdict" contain human-readable description of judge protocol and hack verdict. Localized. Can be absent.
  */
-type Hack = {
+export type Hack = {
   id: number;
   creationTimeSeconds: number;
   hacker: Party;
@@ -540,7 +540,7 @@ type Hack = {
  * @field {problemResults}	List of ProblemResult objects. Party results for each problem. Order of the problems is the same as in "problems" field of the returned object.
  * @field {lastSubmissionTimeSeconds}	Integer. For IOI contests only. Time in seconds from the start of the contest to the last submission that added some points to the total score of the party. Can be absent.
  */
-type RanklistRow = {
+export type RanklistRow = {
   party: Party;
   rank: number;
   points: number;
@@ -559,7 +559,7 @@ type RanklistRow = {
  * @field {type}	Enum: PRELIMINARY, FINAL. If type is PRELIMINARY then points can decrease (if, for example, solution will fail during system test). Otherwise, party can only increase points for this problem by submitting better solutions.
  * @field {bestSubmissionTimeSeconds}	Integer. Number of seconds after the start of the contest before the submission, that brought maximal amount of points for this problem. Can be absent.
  */
-type ProblemResult = {
+export type ProblemResult = {
   points: number;
   penalty?: number;
   rejectedAttemptCount: number;
@@ -569,11 +569,11 @@ type ProblemResult = {
 
 // ------ CODEFORCES API RESPONSE TYPES ------
 
-type CodeforcesResponse<T> = { status: "OK"; result: T } | { status: "FAILED", comment: string };
+export type CodeforcesResponse<T> = { status: "OK"; result: T } | { status: "FAILED", comment: string };
 
 // ------ Custom types ------
 
-type APICreds = {
+export type APICreds = {
   API_KEY: string;
   API_SECRET: string;
 };

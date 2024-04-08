@@ -2,7 +2,37 @@ import axios from "axios";
 import crypto from "crypto";
 import _ from "lodash";
 import qs from "qs";
-import "./types";
+import {
+  BlogEntryCommentsParams,
+  CodeforcesBlogComment,
+  BlogEntryViewParams,
+  BlogEntry,
+  ContestHacksParams,
+  Hack,
+  ContestListParams,
+  Contest,
+  ContestRatingChangesParams,
+  RatingChange,
+  ContestStandingsParams,
+  Problem,
+  RanklistRow,
+  ContestStatusParams,
+  Submission,
+  ProblemsetProblemsParams,
+  ProblemStatistics,
+  ProblemsetRecentStatusParams,
+  RecentActionsParams,
+  RecentAction,
+  UserBlogEntriesParams,
+  UserFriendsParams,
+  UserInfoParams,
+  User,
+  UserRatedListParams,
+  UserRatingParams,
+  UserStatusParams,
+  APICreds,
+  CodeforcesResponse
+} from "./types";
 
 /**
  * Main API class
