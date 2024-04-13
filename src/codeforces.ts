@@ -2,7 +2,37 @@ import axios from "axios";
 import crypto from "crypto";
 import _ from "lodash";
 import qs from "qs";
-import "./types";
+import {
+  BlogEntryCommentsParams,
+  CodeforcesBlogComment,
+  BlogEntryViewParams,
+  BlogEntry,
+  ContestHacksParams,
+  Hack,
+  ContestListParams,
+  Contest,
+  ContestRatingChangesParams,
+  RatingChange,
+  ContestStandingsParams,
+  Problem,
+  RanklistRow,
+  ContestStatusParams,
+  Submission,
+  ProblemsetProblemsParams,
+  ProblemStatistics,
+  ProblemsetRecentStatusParams,
+  RecentActionsParams,
+  RecentAction,
+  UserBlogEntriesParams,
+  UserFriendsParams,
+  UserInfoParams,
+  User,
+  UserRatedListParams,
+  UserRatingParams,
+  UserStatusParams,
+  APICreds,
+  CodeforcesResponse
+} from "./types";
 
 /**
  * Main API class
@@ -242,11 +272,13 @@ function makeApiUrl(options: any, parameters: any): string {
     .value();
 
   let qsFy = qs.stringify(query, { encode: false });
-  let apiSig = `${randomToken}/${options.method}?${qsFy}#${options.API_SECRET}`;
 
-  apiSig = crypto.createHash("sha512").update(apiSig).digest("hex");
-  query.apiSig = randomToken + apiSig;
-  qsFy = qs.stringify(query, { encode: false });
+  if (options.API_KEY && options.API_SECRET) {
+    let apiSig = `${randomToken}/${options.method}?${qsFy}#${options.API_SECRET}`;
+    apiSig = crypto.createHash("sha512").update(apiSig).digest("hex");
+    query.apiSig = randomToken + apiSig;
+    qsFy = qs.stringify(query, { encode: false });
+  }
 
   const url = `${options.API_URL}/${options.method}?${qsFy}`;
 
