@@ -1,4 +1,4 @@
-# Codeforces-API-TS <a target="_blank" href="https://kounter.kerolloz.dev"><img align="right" src="https://t.ly/7DTrU" /></a>
+# Codeforces-API-TS <a target="_blank" href="https://kounter.kerolloz.dev"><img align="right" src="https://kounter.kerolloz.dev/badge/kerolloz.codeforces-api-ts?style=for-the-badge&cntSuffix=%20Views&color=555&label=" /></a>
 
 [![npm version](https://badge.fury.io/js/codeforces-api-ts.svg)](https://www.npmjs.com/package/codeforces-api-ts)
 [![npm downloads](https://img.shields.io/npm/dw/codeforces-api-ts)](https://www.npmjs.com/package/codeforces-api-ts)
