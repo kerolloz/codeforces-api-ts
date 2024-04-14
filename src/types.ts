@@ -341,11 +341,11 @@ export type Contest = {
   name: string;
   type: "CF" | "IOI" | "ICPC";
   phase:
-  | "BEFORE"
-  | "CODING"
-  | "PENDING_SYSTEM_TEST"
-  | "SYSTEM_TEST"
-  | "FINISHED";
+    | "BEFORE"
+    | "CODING"
+    | "PENDING_SYSTEM_TEST"
+    | "SYSTEM_TEST"
+    | "FINISHED";
   frozen: boolean;
   durationSeconds: number;
   startTimeSeconds?: number;
@@ -376,11 +376,11 @@ export type Party = {
   contestId?: number;
   members: Member[];
   participantType:
-  | "CONTESTANT"
-  | "PRACTICE"
-  | "VIRTUAL"
-  | "MANAGER"
-  | "OUT_OF_COMPETITION";
+    | "CONTESTANT"
+    | "PRACTICE"
+    | "VIRTUAL"
+    | "MANAGER"
+    | "OUT_OF_COMPETITION";
   teamId?: number;
   teamName?: string;
   ghost: boolean;
@@ -457,38 +457,38 @@ export type Submission = {
   author: Party;
   programmingLanguage: string;
   verdict?:
-  | "FAILED"
-  | "OK"
-  | "PARTIAL"
-  | "COMPILATION_ERROR"
-  | "RUNTIME_ERROR"
-  | "WRONG_ANSWER"
-  | "PRESENTATION_ERROR"
-  | "TIME_LIMIT_EXCEEDED"
-  | "MEMORY_LIMIT_EXCEEDED"
-  | "IDLENESS_LIMIT_EXCEEDED"
-  | "SECURITY_VIOLATED"
-  | "CRASHED"
-  | "INPUT_PREPARATION_CRASHED"
-  | "CHALLENGED"
-  | "SKIPPED"
-  | "TESTING"
-  | "REJECTED";
+    | "FAILED"
+    | "OK"
+    | "PARTIAL"
+    | "COMPILATION_ERROR"
+    | "RUNTIME_ERROR"
+    | "WRONG_ANSWER"
+    | "PRESENTATION_ERROR"
+    | "TIME_LIMIT_EXCEEDED"
+    | "MEMORY_LIMIT_EXCEEDED"
+    | "IDLENESS_LIMIT_EXCEEDED"
+    | "SECURITY_VIOLATED"
+    | "CRASHED"
+    | "INPUT_PREPARATION_CRASHED"
+    | "CHALLENGED"
+    | "SKIPPED"
+    | "TESTING"
+    | "REJECTED";
   testset:
-  | "SAMPLES"
-  | "PRETESTS"
-  | "TESTS"
-  | "CHALLENGES"
-  | "TESTS1"
-  | "TESTS2"
-  | "TESTS3"
-  | "TESTS4"
-  | "TESTS5"
-  | "TESTS6"
-  | "TESTS7"
-  | "TESTS8"
-  | "TESTS9"
-  | "TESTS10";
+    | "SAMPLES"
+    | "PRETESTS"
+    | "TESTS"
+    | "CHALLENGES"
+    | "TESTS1"
+    | "TESTS2"
+    | "TESTS3"
+    | "TESTS4"
+    | "TESTS5"
+    | "TESTS6"
+    | "TESTS7"
+    | "TESTS8"
+    | "TESTS9"
+    | "TESTS10";
   passedTestCount: number;
   timeConsumedMillis: number;
   memoryConsumedBytes: number;
@@ -512,14 +512,14 @@ export type Hack = {
   hacker: Party;
   defender: Party;
   verdict?:
-  | "HACK_SUCCESSFUL"
-  | "HACK_UNSUCCESSFUL"
-  | "INVALID_INPUT"
-  | "GENERATOR_INCOMPILABLE"
-  | "GENERATOR_CRASHED"
-  | "IGNORED"
-  | "TESTING"
-  | "OTHER";
+    | "HACK_SUCCESSFUL"
+    | "HACK_UNSUCCESSFUL"
+    | "INVALID_INPUT"
+    | "GENERATOR_INCOMPILABLE"
+    | "GENERATOR_CRASHED"
+    | "IGNORED"
+    | "TESTING"
+    | "OTHER";
   problem: Problem;
   test?: string;
   judgeProtocol?: {
@@ -569,7 +569,9 @@ export type ProblemResult = {
 
 // ------ CODEFORCES API RESPONSE TYPES ------
 
-export type CodeforcesResponse<T> = { status: "OK"; result: T } | { status: "FAILED", comment: string };
+export type CodeforcesResponse<T> =
+  | { status: "OK"; result: T }
+  | { status: "FAILED"; comment: string };
 
 // ------ Custom types ------
 
@@ -577,3 +579,46 @@ export type APICreds = {
   API_KEY: string;
   API_SECRET: string;
 };
+
+export type CodeforcesMethodsParams = {
+  "blogEntry.comments": BlogEntryCommentsParams;
+  "blogEntry.view": BlogEntryViewParams;
+  "contest.hacks": ContestHacksParams;
+  "contest.list": ContestListParams;
+  "contest.ratingChanges": ContestRatingChangesParams;
+  "contest.standings": ContestStandingsParams;
+  "contest.status": ContestStatusParams;
+  "problemset.problems": ProblemsetProblemsParams;
+  "problemset.recentStatus": ProblemsetRecentStatusParams;
+  recentActions: RecentActionsParams;
+  "user.blogEntries": UserBlogEntriesParams;
+  "user.friends": UserFriendsParams;
+  "user.info": UserInfoParams;
+  "user.ratedList": UserRatedListParams;
+  "user.rating": UserRatingParams;
+  "user.status": UserStatusParams;
+};
+
+type MethodResult = {
+  "blogEntry.comments": CodeforcesBlogComment[];
+  "blogEntry.view": BlogEntry;
+  "contest.hacks": Hack[];
+  "contest.list": Contest[];
+  "contest.ratingChanges": RatingChange[];
+  "contest.standings": RanklistRow[];
+  "contest.status": Submission[];
+  "problemset.problems": Problem[];
+  "problemset.recentStatus": Submission[];
+  recentActions: RecentAction[];
+  "user.blogEntries": BlogEntry[];
+  "user.friends": User[];
+  "user.info": User[];
+  "user.ratedList": User[];
+  "user.rating": RatingChange[];
+  "user.status": Submission[];
+};
+
+export type CodeforcesMethodResult<T extends CodeforcesMethod> =
+  CodeforcesResponse<MethodResult[T]>;
+
+export type CodeforcesMethod = keyof CodeforcesMethodsParams;

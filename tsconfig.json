@@ -15,10 +15,8 @@
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
     "strict": true,
-    "paths": {
-      "*": ["types/*"]
-    }
+    "paths": { "*": ["types/*"] }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "types", "dist"]
 }

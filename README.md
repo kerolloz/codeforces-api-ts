@@ -18,31 +18,31 @@ npm install codeforces-api-ts
 ## Usage
 
 ```typescript
-import { CodeForcesAPI } from "codeforces-api-ts";
+import { CodeforcesAPI } from "codeforces-api-ts";
 
 (async () => {
-  CodeForcesAPI.setCredentials({
-    API_KEY: "YOUR_API_KEY",
-    API_SECRET: "YOUR_API_SECRET",
+  CodeforcesAPI.setCredentials({
+    API_KEY: "your-api-key",
+    API_SECRET: "your-api-secret",
   });
 
   // all methods return a promise
-  await CodeForcesAPI.blogEntry.comments({ blogEntryId: 79 });
-  await CodeForcesAPI.blogEntry.view({ blogEntryId: 79 });
-  await CodeForcesAPI.contest.hacks({ contestId: 566 });
-  await CodeForcesAPI.contest.list();
-  await CodeForcesAPI.contest.ratingChanges({ contestId: 566 });
-  await CodeForcesAPI.contest.standings({ contestId: 566 });
-  await CodeForcesAPI.contest.status({ contestId: 566 });
-  await CodeForcesAPI.problemset.problems();
-  await CodeForcesAPI.problemset.recentStatus({ count: 10 });
-  await CodeForcesAPI.recentActions({ maxCount: 10 });
-  await CodeForcesAPI.user.blogEntries({ handle: "kerolloz" });
-  await CodeForcesAPI.user.friends(); // requires authorization
-  await CodeForcesAPI.user.info({ handles: "kerolloz" });
-  await CodeForcesAPI.user.ratedList();
-  await CodeForcesAPI.user.rating({ handle: "kerolloz" });
-  await CodeForcesAPI.user.status({ handle: "kerolloz" });
+  await CodeforcesAPI.call("blogEntry.comments", { blogEntryId: 79 });
+  await CodeforcesAPI.call("blogEntry.view", { blogEntryId: 79 });
+  await CodeforcesAPI.call("contest.hacks", { contestId: 566 });
+  await CodeforcesAPI.call("contest.list", {});
+  await CodeforcesAPI.call("contest.ratingChanges", { contestId: 566 });
+  await CodeforcesAPI.call("contest.standings", { contestId: 566 });
+  await CodeforcesAPI.call("contest.status", { contestId: 566 });
+  await CodeforcesAPI.call("problemset.problems", {});
+  await CodeforcesAPI.call("problemset.recentStatus", { count: 10 });
+  await CodeforcesAPI.call("recentActions", { maxCount: 10 });
+  await CodeforcesAPI.call("user.blogEntries", { handle: "kerolloz" });
+  await CodeforcesAPI.call("user.friends", {}); // requires authorization
+  await CodeforcesAPI.call("user.info", { handles: "kerolloz" });
+  await CodeforcesAPI.call("user.ratedList", {});
+  await CodeforcesAPI.call("user.rating", { handle: "kerolloz" });
+  await CodeforcesAPI.call("user.status", { handle: "kerolloz" });
 })();
 
 ```

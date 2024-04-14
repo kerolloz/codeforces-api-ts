@@ -10,3 +10,4 @@ coverage
 .git
 gulpfile.js
 tsconfig.json
+bun.lockb

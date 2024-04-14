@@ -1,6 +1,6 @@
 {
   "name": "codeforces-api-ts",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Codeforces API Client Library for Node.js with Typescript support",
   "main": "dist/codeforces.js",
   "scripts": {
@@ -11,6 +11,7 @@
   "private": false,
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "1.6.4",
     "@types/chai": "^4.3.13",
     "@types/lodash": "^4.14.191",
     "@types/mocha": "^10.0.6",
@@ -22,11 +23,10 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "axios": "^1.2.2",
     "lodash": "^4.17.21",
-    "qs": "^6.11.0"
+    "qs": "^6.12.1"
   },
-  "homepage": "https://github.com/kerolloz/codeforces-api-node",
+  "homepage": "https://github.com/kerolloz/codeforces-api-ts",
   "keywords": [
     "codeforces",
     "codeforces api",
@@ -37,10 +37,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kerolloz/codeforces-api-node.git"
+    "url": "https://github.com/kerolloz/codeforces-api-ts.git"
   },
   "contributors": [],
   "bugs": {
-    "url": "https://github.com/kerolloz/codeforces-api-node/issues"
+    "url": "https://github.com/kerolloz/codeforces-api-ts/issues"
   }
 }
