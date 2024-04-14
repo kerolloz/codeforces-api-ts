@@ -1,6 +1,6 @@
 {
   "name": "codeforces-api-ts",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Codeforces API Client Library for Node.js with Typescript support",
   "main": "dist/codeforces.js",
   "scripts": {
